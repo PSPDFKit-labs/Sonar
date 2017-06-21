@@ -60,5 +60,17 @@ public class Sonar {
         }
     }
 
+    /// Fetches an radar item. Currently only implemented for OpenRadar.
+    ///
+    /// - parameter: rardarID: The ID for the radar.
+    /// - parameter closure: A closure that will be called when the login is completed, on success it will
+    ///                      contain the radar object; on failure a `SonarError`.
+    public func fetch(radarID: Int, closure: @escaping (Result<Radar, SonarError>) -> Void) {
+        self.tracker.fetch(radarID: radarID) { result in
+            closure(result)
+            self.hold()
+        }
+    }
+
     private func hold() {}
 }

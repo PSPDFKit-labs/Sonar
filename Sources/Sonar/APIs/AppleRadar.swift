@@ -95,6 +95,10 @@ final class AppleRadar: BugTracker {
                 }
     }
 
+    func fetch(radarID: Int, closure: @escaping (Result<Radar, SonarError>) -> Void) {
+        fatalError("fetching from Apple Radar is not implemented")
+    }
+
     // MARK: - Private Functions
 
     private func handleTwoFactorChallenge(code: String, headers: [AnyHashable: Any],

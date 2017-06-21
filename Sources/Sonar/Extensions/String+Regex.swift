@@ -10,8 +10,9 @@ extension String {
     /// - returns: The string from the given group on the match (if any).
     func match(pattern: String, group: Int, options: NSRegularExpression.Options = []) -> String? {
         do {
+            let nsstring = self as NSString
             let regex = try NSRegularExpression(pattern: pattern, options: options)
-            let range = NSRange(location: 0, length: self.characters.count)
+            let range = NSRange(location: 0, length: nsstring.length)
 
             guard let match = regex.firstMatch(in: self, options: [], range: range) else {
                 return nil
@@ -22,11 +23,9 @@ extension String {
             }
 
             let matchRange = match.rangeAt(group)
-            let startRange = self.index(self.startIndex, offsetBy: matchRange.location)
-            let endRange = self.index(startRange, offsetBy: matchRange.length)
 
-            return self
-                .substring(with: startRange ..< endRange)
+            return nsstring
+                .substring(with: matchRange)
                 .trimmingCharacters(in: .whitespacesAndNewlines)
         } catch {
             return nil

@@ -4,8 +4,10 @@ import Foundation
 /// Open radar request router.
 ///
 /// - create: The `Route` used to create a new radar.
+/// - read: The `Route` used to fetch data from an existing radar.
 enum OpenRadarRouter {
     case create(radar: Radar)
+    case read(radarID: Int)
 
     fileprivate static let baseURL = URL(string: "https://openradar.appspot.com")!
 
@@ -27,6 +29,11 @@ enum OpenRadarRouter {
                     "status": "Open",
                     "title": radar.title,
                 ])
+
+            case .read(let radarID):
+                return (path: "/api/radar", method: .get, parameters: [
+                    "number": String(radarID)
+                    ])
         }
     }
 }

@@ -26,4 +26,11 @@ protocol BugTracker {
     /// - parameter closure: A closure that will be called when the login is completed, on success it will
     ///                      contain a radar ID; on failure a `SonarError`.
     func create(radar: Radar, closure: @escaping (Result<Int, SonarError>) -> Void)
+
+    /// Fetches an radar item. Currently only implemented for OpenRadar.
+    ///
+    /// - parameter: rardarID: The ID for the radar.
+    /// - parameter closure: A closure that will be called when the login is completed, on success it will
+    ///                      contain the radar object; on failure a `SonarError`.
+    func fetch(radarID: Int, closure: @escaping (Result<Radar, SonarError>) -> Void)
 }
